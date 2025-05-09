@@ -145,13 +145,14 @@ console.log(order.categorizeUrgency());
 
 
 
-function Employee(id, name, performanceMetrics, feedback) {
+class Employee{
+constructor(id, name, performanceMetrics, feedback) {
     this.id = id;
     this.name = name;
     this.performanceMetrics = performanceMetrics; 
     this.feedback = feedback ;
 }
-
+}
 
 Employee.prototype.calculateAverageScore = function() {
     const metrics = this.performanceMetrics;
@@ -206,12 +207,13 @@ console.log('Feedback:', emp.feedback);
 
 
 
-function Course(title, instructor, students) {
+class Course{
+constructor (title, instructor, students) {
     this.title = title;
     this.instructor = instructor;
     this.students = students;     
 }
-
+}
 
 Course.prototype.getCompletedStudents = function() {
     return this.students
@@ -251,7 +253,7 @@ const course = new Course('Algebra 101', instructor, students);
 
 console.log(course.getCompletedStudents()); 
 
-console.log(course.countStudentsByExpertise('Biology')); 
+console.log(course.countStudentsByExpertise('math')); 
 
 
 console.log(course.instructorMessage()); 
