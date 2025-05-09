@@ -97,9 +97,6 @@ const exampleLogs = [
     {date: '2025-05-02', hoursWorked: 7},
     {date: '2025-05-03', hoursWorked: 9},
     {date: '2025-05-04', hoursWorked: 6},
-    {date: '2025-05-05', hoursWorked: 5},
-    {date: '2025-05-06', hoursWorked: 4},
-    {date: '2025-05-07', hoursWorked: 3}
 ];
 
 const timeLog = new TimeLog('John ', {name: 'Javascriptproject', hourlyRate: 40}, exampleLogs);
@@ -208,34 +205,54 @@ emp.addFeedback('Improve managing  your time only');
 console.log('Feedback:', emp.feedback);
 
 
-class Course {
-    constructor(title, instructor) {
-        this.title = title;
-        this.instructor = instructor;
-        this.students = [];
-    }
 
-    addStudent(name, completionStatus) {
-        this.students.push({ name, completionStatus });
-    }
-
-    getCompletedStudents() {
-        return this.students.filter(student => student.completionStatus).map(student => student.name);
-    }
-
-    countStudentsByExpertise() {
-        return this.students.length;
-    }
-
-    instructorMessage() {
-        return this.students.length >= 5 ? "Instructor has a large class" : "Instructor has a manageable class";
-    }
+function Course(title, instructor, students) {
+    this.title = title;
+    this.instructor = instructor;
+    this.students = students;     
 }
 
 
-const course1 = new Course("JavaScript Basics", { name: "Merry", expertise: "Programming" });
-course1.addStudent("Joy", true);
-course1.addStudent("Micheal", false);
-console.log(course1.getCompletedStudents()); 
-console.log(course1.instructorMessage()); 
+Course.prototype.getCompletedStudents = function() {
+    return this.students
+        .filter(student => student.completionStatus === true)
+        .map(student => student.name);
+};
+
+
+Course.prototype.countStudentsByExpertise = function(expertise) {
+    if (this.instructor.expertise === expertise) {
+        return this.students.length;
+    } else {
+        return 0;
+    }
+};
+
+
+Course.prototype.instructorMessage = function() {
+    if (this.students.length > 5) {
+        return `Instructor ${this.instructor.name} has a class with ${this.students.length} students.`;
+    } else {
+        return `Instructor ${this.instructor.name} has a class with ${this.students.length} students.`;
+    }
+};
+
+
+const instructor = { name: 'John', expertise: 'Biology' };
+const students = [
+    { name: 'pauline', completionStatus: true },
+    { name: 'Shaline', completionStatus: false },
+    { name: 'Jecinta', completionStatus: true },
+    { name: 'Kisanet', completionStatus: true },
+    
+];
+
+const course = new Course('Algebra 101', instructor, students);
+
+console.log(course.getCompletedStudents()); 
+
+console.log(course.countStudentsByExpertise('Biology')); 
+
+
+console.log(course.instructorMessage()); 
 
