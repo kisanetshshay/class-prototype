@@ -152,7 +152,7 @@ function Employee(id, name, performanceMetrics, feedback) {
     this.id = id;
     this.name = name;
     this.performanceMetrics = performanceMetrics; 
-    this.feedback = feedback || [];
+    this.feedback = feedback ;
 }
 
 
